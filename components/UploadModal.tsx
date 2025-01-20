@@ -119,12 +119,16 @@ const UploadModal = () => {
           disabled={isLoading}
           {...register("title", { required: true })}
           placeholder="Song title"
+          className="cursor-text"
+          autoComplete="off"
         />
         <Input
           id="author"
           disabled={isLoading}
           {...register("author", { required: true })}
           placeholder="Song author"
+          className="cursor-text"
+          autoComplete="off"
         />
         <div>
           <div className="pb-1">Select a song file</div>
@@ -135,6 +139,8 @@ const UploadModal = () => {
             accept=".mp3"
             id="song"
             {...register("song", { required: true })}
+            className="cursor-pointer"
+            autoComplete="off"
           />
         </div>
         <div>
@@ -146,6 +152,8 @@ const UploadModal = () => {
             accept="image/*"
             id="image"
             {...register("image", { required: true })}
+            className="cursor-pointer"
+            autoComplete="off"
           />
         </div>
         <Button disabled={isLoading} type="submit">
