@@ -21,7 +21,11 @@ interface PlayerContentProps {
 
 const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const player = usePlayer();
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(() => {
+    // Initialize volume from localStorage or default to 1
+    const savedVolume = localStorage.getItem("spotify-volume");
+    return savedVolume ? parseFloat(savedVolume) : 0.2;
+  });
   const [isPlaying, setIsPlaying] = useState(false);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
@@ -75,6 +79,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       sound?.unload();
     };
   }, [sound]);
+
+  // Update localStorage when volume changes
+  useEffect(() => {
+    localStorage.setItem("spotify-volume", volume.toString());
+  }, [volume]);
 
   const handlePlay = () => {
     if (!isPlaying) {
